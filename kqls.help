@@ -1,0 +1,17 @@
+kqls help: Show all commands
+kqls auth AUTHENTICATION_KEY PIN: Update new authenticated key and PIN
+
+kqls newTrades all 2020-20-31: Get all trades on 2020-20-31
+kqls newTrades all 2020-20-20 2020-20-31: Get all trades from 2020-20-20 to 2020-20-31
+
+kqls update daily: Update market intraday data from cafef
+kqls update realtime: Update realtime market data from mbs
+kqls matched: Get all transactions of the market
+kqls stats: Build stats reports
+
+kqls prices VCB,BID: Get current prices of a list of stocks
+kqls orders: List out all current orders
+kqls orders BID: List out all current orders of BID
+kqls buy PVD 10 10.5 acc1: Buy 10 PVD stocks with price 10.5 on account 1
+kqls sell PVD 10 10.5 acc1: Sell 10 PVD stocks with price 10.5 on account 1
+kqls cancel 123456
