@@ -3,4 +3,3 @@ env/
 .DS_Store
 logs/*.log
 cookies.txt
-data/
