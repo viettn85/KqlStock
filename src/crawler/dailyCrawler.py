@@ -14,7 +14,7 @@ logger = logging.getLogger()
 load_dotenv(dotenv_path='stock.env')
 
 data_high_vol = os.getenv("data_high_vol")
-data_market_intraday = os.getenv('data_market_intraday')
+data_market = os.getenv('data_market')
 
 LINK = 'https://s.cafef.vn/Lich-su-giao-dich-{}-1.chn'
 RAW_NAME = ['Ngày', 'Giá đóng cửa', 'GD khớp lệnh',
@@ -92,4 +92,4 @@ def updateIntraday(location):
     logger.info("Ended updating on {}".format(today))
 
 if __name__ == '__main__':
-    updateIntraday(data_market_intraday)
+    updateIntraday(data_market)

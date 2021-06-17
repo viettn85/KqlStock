@@ -104,8 +104,8 @@ def getDataLocation():
     if (current_time >= "10:15") and (current_time <= "21:00"):
         return os.getenv('data_realtime')
     else:
-        return os.getenv('data_market_intraday')
-    # return os.getenv('data_market_intraday')
+        return os.getenv('data_market')
+    # return os.getenv('data_market')
 
 if __name__ == '__main__':
     if sys.argv[1] == 'volumes':

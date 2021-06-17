@@ -15,6 +15,10 @@ elif [ $1 == 'matched' ]
 then
     echo Get matched transactions
     python3 src/api/volumes.py $1
+elif [ $1 == 'tracking' ]
+then
+    echo Tracking targeted stocks and prices
+    python3 src/watch/tracking.py
 elif [ $1 == 'volumes' ]
 then
     echo Get high volumes
@@ -64,9 +68,9 @@ then
     if [ $2 == 'realtime' ]
     then
         echo Remove old files
-        rm data/market/realtime/*.csv
+        rm data/realtime/*.csv
         echo Copy the historical data
-        cp data/market/intraday/*.csv data/market/realtime
+        cp data/market/*.csv data/realtime
         echo Update realtime data
         python3 src/api/realtimeUpdate.py
     fi

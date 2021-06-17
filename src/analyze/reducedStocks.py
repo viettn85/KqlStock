@@ -35,7 +35,7 @@ def reportReducingLevels():
     df = pd.DataFrame.from_dict({"Stock": stocks, "Change": changes, "Open": opens, "Close": closes})
     df.sort_values(by="Change", ascending=True, inplace=True)
     print(df.head(20))
-    df.to_csv("{}reducingRealtime.csv".format(os.getenv("reports")), index=False)
+    df.to_csv("{}reducingRealtime.csv".format(os.getenv("data_report")), index=False)
 
 def shortList(list):
     location = os.getenv("data_high_vol")
@@ -59,7 +59,7 @@ def shortList(list):
     df = pd.DataFrame.from_dict({"Stock": stocks, "Change": changes, "Open": opens, "Close": closes})
     df.sort_values(by="Change", ascending=True, inplace=True)
     print(df.head(20))
-    df.to_csv("{}reducingRealtimeBank.csv".format(os.getenv("reports")), index=False)
+    df.to_csv("{}reducingRealtimeBank.csv".format(os.getenv("data_report")), index=False)
 
 def pctChange(open, close):
     return round((close - open)/open * 100, 2)

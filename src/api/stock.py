@@ -126,6 +126,63 @@ def getSecurityList(allStocks):
         priceDf = priceDf.append(df)
     return priceDf
 
+def extractATOCPrice(data):
+    prices = data.split("^")
+    return {
+        "Stock": prices[1],
+        "BP1": prices[9],
+        "BV1": int(prices[10]),
+        "SP1": prices[14],
+        "SV1": int(prices[15]),
+    }
+
+def getATOC(allStocks):
+    noStockPerRequest = 40
+    if type(allStocks) == str:
+        stockList = allStocks.split(',')
+    else:
+        stockList = allStocks
+    # stockList = ['ACB', 'VPB']
+    count = int(len(stockList) / noStockPerRequest) + 1
+    priceDf = pd.DataFrame([])
+    for i in range(count):
+        subList = stockList[i * noStockPerRequest: (i+1) * noStockPerRequest]
+        if len(subList) == 0:
+            continue
+        stocks = ','.join(subList)
+        df = pd.DataFrame([])
+        try:
+            URL = os.getenv('securityList')
+            # Params
+            pKeyAuthenticate = os.getenv('pKeyAuthenticate')
+            pMainAccount = os.getenv('pMainAccount')
+            pTradingCenter = os.getenv('pTradingCenter')
+            _ = os.getenv('_')
+            PARAMS = {
+                'pKeyAuthenticate': pKeyAuthenticate,
+                'pMainAccount': pMainAccount,
+                'pListShare': stocks,
+                'pTradingCenter': pTradingCenter,
+                '_': _
+            }
+            content = str(requests.get(url=URL, params=PARAMS).content)
+            if "ERR" in content:
+                print("ERROR connecting: " + content)
+                sys.exit(0)
+            details = content.split("|")[3]
+            securities = details.split("#")
+            securityDetails = []
+            for security in securities:
+                prices = extractATOCPrice(security)
+                securityDetails.append(prices)
+            df = pd.DataFrame(securityDetails)
+        except Exception as ex:
+            logger.exception(ex)
+            logging.debug("Exception when getting stock prices")
+            logging.debug(ex)
+        priceDf = priceDf.append(df)
+    return priceDf
+
 def orderBuy(stock, volume, price, account):
     try:
         URL = os.getenv('newOrder')

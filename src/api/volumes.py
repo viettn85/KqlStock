@@ -83,7 +83,7 @@ def getTransactions(stocks, date, time=""):
     stockList = []
     if stocks == "all":
         stockList = list(filter(lambda x: os.path.splitext(x)
-                           [1], os.listdir(os.getenv("data_market_intraday"))))
+                           [1], os.listdir(os.getenv("data_market"))))
         stockList = list(map(lambda stock: stock[0:3], stockList))
     else:
         stockList = stocks.split(",")
@@ -96,7 +96,7 @@ def getHistoryTransactions(stocks, fromDate, toDate):
     stockList = []
     if stocks == "all":
         stockList = list(filter(lambda x: os.path.splitext(x)
-                           [1], os.listdir(os.getenv("data_market_intraday"))))
+                           [1], os.listdir(os.getenv("data_market"))))
         stockList = map(lambda stock: stock[0:3], stockList)
     else:
         stockList = stocks.split(",")
